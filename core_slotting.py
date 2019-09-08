@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 import os
@@ -11,10 +5,6 @@ import csv
 import glob
 from openpyxl import load_workbook
 import warnings
-
-
-# In[2]:
-
 
 # Function to input week number, and identify input PDL location and output file path
 def week_number():
@@ -27,10 +17,6 @@ def week_number():
     
     return inputPDL_path, outputFile_path
 
-
-# In[3]:
-
-
 # Function to open PDL file and extract data required for slotting tool
 def read_PDL(inputPDL_path):
 
@@ -42,10 +28,6 @@ def read_PDL(inputPDL_path):
     df_ODL = input_PDL[colNames]
     
     return df_ODL
-
-
-# In[4]:
-
 
 #Function to export the PDL data to output file (Slotting Tool) ODL Tab
 def tool_ODL(outputFile_path, df_ODL_complete):
@@ -66,10 +48,6 @@ def tool_ODL(outputFile_path, df_ODL_complete):
     writer.save()
     writer.close()
 
-
-# In[5]:
-
-
 # Function to read MARVIN's ADL output of Product Creation Tool 
 def read_PCT():
     
@@ -87,10 +65,6 @@ def read_PCT():
     
     return df_prodList
 
-
-# In[6]:
-
-
 # Function to export Product List to Slotting Tool (SKU List Tab)
 def tool_SKU(outputFile_path, df_prodList):
 
@@ -106,10 +80,6 @@ def tool_SKU(outputFile_path, df_prodList):
     
     writer.save()
     writer.close()
-    
-    
-# In[7]:
-
     
 def populate_ODL(df_ODL, df_prodList):
 
@@ -228,14 +198,12 @@ def populate_ODL(df_ODL, df_prodList):
     #Populate Brand Partnership column based on inserts split array
     df_ODL["P"] = df_ODL["inserts_split"].apply(lambda x: "P" if "P" in x else "")
     df_ODL["PI"] = df_ODL["inserts_split"].apply(lambda x: "PI" if "PI" in x else "")
+    df_ODL["Z1"] = df_ODL["inserts_split"].apply(lambda x: "Z1" if "Z1" in x else "")
     
     #Drop meal_swap_split and inserts_split column from final dataframe
     df_ODL = df_ODL.drop(["meal_swap_split","inserts_split"], axis=1)
     
     return df_ODL
-
-# In[8]:
-
 
 if __name__ == '__main__':
     
