@@ -172,6 +172,8 @@ def populate_ODL(df_ODL, df_prodList):
     df_ODL["D"] = df_ODL["inserts_split"].apply(lambda x: 1 if "D1" in x else (2 if "D2" in x else ""))
     df_ODL["E"] = df_ODL["inserts_split"].apply(lambda x: 1 if "E1" in x else (2 if "E2" in x else ""))
     df_ODL["G"] = df_ODL["inserts_split"].apply(lambda x: 1 if "G1" in x else (2 if "G2" in x else ""))
+    df_ODL["H"] = df_ODL["inserts_split"].apply(lambda x: 1 if "H1" in x else (2 if "H2" in x else ""))
+    df_ODL["J"] = df_ODL["inserts_split"].apply(lambda x: 1 if "J1" in x else (2 if "J2" in x else ""))
     
     #Populate Top Ice column based on last 3 characters of ice string
     df_ODL["Top Ice"] = df_ODL["ice_string"].apply(lambda x: "T3F" if x[-3:] == "T3F" else ("T5F" if x[-3:] == "T5F" else ""))
@@ -198,7 +200,7 @@ def populate_ODL(df_ODL, df_prodList):
     #Populate Brand Partnership column based on inserts split array
     df_ODL["P"] = df_ODL["inserts_split"].apply(lambda x: "P" if "P" in x else "")
     df_ODL["PI"] = df_ODL["inserts_split"].apply(lambda x: "PI" if "PI" in x else "")
-    df_ODL["Z1"] = df_ODL["inserts_split"].apply(lambda x: "Z1" if "Z1" in x else "")
+    #df_ODL["Z1"] = df_ODL["inserts_split"].apply(lambda x: "Z1" if "Z1" in x else "")
     
     #Drop meal_swap_split and inserts_split column from final dataframe
     df_ODL = df_ODL.drop(["meal_swap_split","inserts_split"], axis=1)
